@@ -1,0 +1,86 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block slider %}
+
+{% endblock %}
+{% block content %}
+
+
+    <div class="card bg-transparent align-items-center mt-5" style="border: none">
+        <img class="card-img-top rounded-circle img-fluid " style="width: 10%" src="{% static 'images/user.png' %}">
+        <p class="card-title mt-3">
+            {{ user.username }}
+        </p>
+        <div class="row">
+            <button class="btn btn-light bg-transparent card-link" href="#">رزرو های من</button>
+            <button class="btn btn-light bg-transparent card-link" href="#S"> کسب وکار های من</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <a class="float-right" href="{% url 'createBusiness' user.id %}">
+            <button class="btn btn-primary">ساخب کسب وکار جدید</button>
+        </a>
+    </div>
+
+    <div class="container mt-5 p-2 text-center"
+         style="border:5px solid #243055; ">
+        <h4>رزرو های من</h4>
+        <div class="row mt-4 justify-content-center">
+            {% for history in historys %}
+                <div class="col-md-4 col-10 col-sm-6 mt-4">
+                    <div class="card bg-transparent  text-left p-4" style="border:1px solid #243055;">
+                        <div class="card-text m-2 breadcrumb bg-transparent">
+                            <div class="breadcrumb-item">{{ history.service.business.name }}</div>
+                            <div class="breadcrumb-item">{{ history.service.name }}</div>
+                        </div>
+                        <div class="card-text m-2"><b>تاریخ:</b>{{ history.date }}</div>
+                        <div class="card-text m-2"><b>زمان شروع:</b>{{ history.sans.start_time }}</div>
+                        <div class="card-text m-2"><b>زمان پایان:</b>{{ history.sans.end_time }}</div>
+                        <div class="card-text m-2"><b>آدرس:</b>{{ history.service.business.address }}</div>
+                        <div class="card-text m-2"><b>توضیحات:</b>{{ history.description }}</div>
+                        <div class="row m-2">
+                            <a href="{% url 'ServicesPage' history.service.id %}">
+                                <button
+                                        class="btn btn-outline-primary card-link">رزرو بیشتر
+                                </button>
+                            </a>
+                            {#                        <button class="btn btn-outline-danger card-link">لغو</button>#}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="btn btn-outline-dark mt-3">بیشتر</button>
+
+    </div>
+    <div class="container mt-5 p-2 text-center"
+         style="border:5px solid #243055 ">
+        <h4 accesskey="#S">کسب وکار های من</h4>
+        <div class="row mt-4 justify-content-center">
+            {% for business in mybusiness %}
+                <div class="col-md-4 col-10 col-sm-8 mt-4 ">
+                    <div class="card bg-transparent  text-left p-4" style="border:1px solid  #243055;">
+                        <div class="breadcrumb bg-transparent">
+                            <div class="breadcrumb-item">{{ business.category.name }}</div>
+                            <div class="breadcrumb-item">{{ business.name }}</div>
+                        </div>
+                        <div class="row m-2">
+                            <a href="{% url 'BusinessPage' business.id %}">
+                                <button class="btn btn-outline-primary card-link m-2"> صفحه کسب وکار</button>
+                            </a>
+                            <button class="btn btn-outline-danger card-link m-2">حذف کسب وکار</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="btn btn-outline-dark mt-3">بیشتر</button>
+
+    </div>
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/tether.js' %}"></script>
+    <script src="{% static 'css/bootstrap.min.css' %}"></script>
+{% endblock %}
+</html>
