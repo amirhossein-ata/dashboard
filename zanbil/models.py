@@ -28,6 +28,7 @@ class Business(models.Model):
     address = models.TextField(max_length=500)
     description = models.TextField(max_length=600, default='test')
     category = models.ForeignKey(Categories, on_delete=models.DO_NOTHING)
+    image =models.ImageField(default='2.jpg')
 
     def __str__(self):
         return self.name
@@ -98,3 +99,7 @@ class pics(models.Model):
     Business = models.ForeignKey(to=Business, on_delete=models.CASCADE, null=True, related_name='business')
     Service = models.ForeignKey(to=Services, on_delete=models.CASCADE, null=True, related_name='service')
     image = models.ImageField(blank=True)
+
+class Test(models.Model):
+    name = models.CharField(max_length =100)
+    image = models.ImageField()
