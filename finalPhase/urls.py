@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from zanbil import views,BusinessPageController,BusinessSelectPageController,AccountPageController,ServicePageController,SearchController
+from django.conf import settings
+from django.conf.urls.static import static
+
+from zanbil import views,BusinessPageController,BusinessSelectPageController,AccountPageController,ServicePageController,SearchController,dashboardController
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +33,10 @@ urlpatterns = [
     path('comment/<int:id>/', BusinessPageController.comment, name='comment'),
     path('createBusiness/<int:id>',AccountPageController.createBusiness,name='createBusiness'),
     path('test',views.test),
-    path('dashboard',views.dashboard , name='dashboard'),
+    path('dashboard/<int:business_id>',dashboardController.dashboard , name='dashboard'),
+    path('changePhoto/<int:id>',views.form,name='changePhoto'),
+    path('test/<int:id>',views.imagetest,name='imagetest')
 ]
+
+if settings.DEBUG is True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
