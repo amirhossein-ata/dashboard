@@ -45,4 +45,4 @@ def dashboard(request , business_id):
         categories = Categories.objects.all()
         
         return render(request , 'dashboard.html',{'business': business, 'services': services,
-         'reviews': listed_reviews, 'user': user,'categories':categories ,'dates':this_week_days , 'reserves_count' : reserves , 'total_reserves_count': total_count})
+         'reviews': reviews, 'user': user,'categories':categories ,'dates':this_week_days , 'reserves_count' : reserves , 'total_reserves_count': total_count})

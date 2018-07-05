@@ -92,52 +92,17 @@
         
 
         <div class="mt-5 mb-5 p-5" style="background-color:rgba(215,249,255,0.36)">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-
-                    {% for reviewList in reviews %}
-                        {% if forloop.first %}
-                            <div class="carousel-item  active">
-                                <div class="row justify-content-around ">
-                                    {% for review in reviewList %}
-                                        <div class="col-3 ">
-                                            <div class="card p-3 text-light bg-info text-center border-0 ">
-                                                <p> امتیاز : {{ review.rating }}</p>
-                                                <p>{{ review.user }}:{{ review.description }}</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-
-                                </div>
-                            </div>
-                        {% else %}
-                            <div class="carousel-item ">
-                                <div class="row justify-content-around">
-                                    {% for review in reviewList %}
-                                        <div class="col-3">
-                                            <div class="card p-3 text-light bg-info text-center border-0 ">
-                                                <p> امتیاز : {{ review.rating }}</p>
-                                                <p>{{ review.user }}:{{ review.description }}</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-
+            
+            {% for review in reviews %}
+                <div class="card pt-3 pb-3 m-3 text-right" style="border-right:5px solid #243055 ; border-left:none;border-top:none;border-bottom:none">
+                    <div class="card-text mr-5 row">
+                        <span>{{review.user}} : </span>
+                        <span>{{review.description}}</span>
+                        <span class="mr-auto ml-5">{{review.rating}}</span>
+                     </div>
                 </div>
-
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon bg-info" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon bg-info" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+            {% endfor %}
+                
         </div>
     </div>
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
