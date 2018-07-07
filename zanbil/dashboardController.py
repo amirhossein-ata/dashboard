@@ -10,7 +10,7 @@ from khayyam import *
 categories = Categories.objects.all()
 user = Users.objects.get(id=1)
 
-def dashboard(request , business_id):
+def render_dashboard(request , business_id):
         business = Business.objects.get(id=business_id)
         services = Services.objects.filter(business__id=business_id)
         reviews = Review.objects.filter(business=business_id)
@@ -30,19 +30,19 @@ def dashboard(request , business_id):
         
         total_count = sum(reserves)
 
-        listed_reviews = []
-        i = 0
-        while i < len(reviews):
-            if i % 3 == 0:
-                if i + 2 < len(reviews):
-                    listed_reviews.append([reviews[i], reviews[i + 1], reviews[i + 2]])
-                    i += 3
-                elif i + 1 < len(reviews):
-                    listed_reviews.append([reviews[i], reviews[i + 1]])
-                    i += 2
-                else:
-                    listed_reviews.append([reviews[i]])
-                    i += 1
+        # listed_reviews = []
+        # i = 0
+        # while i < len(reviews):
+        #     if i % 3 == 0:
+        #         if i + 2 < len(reviews):
+        #             listed_reviews.append([reviews[i], reviews[i + 1], reviews[i + 2]])
+        #             i += 3
+        #         elif i + 1 < len(reviews):
+        #             listed_reviews.append([reviews[i], reviews[i + 1]])
+        #             i += 2
+        #         else:
+        #             listed_reviews.append([reviews[i]])
+        #             i += 1
         categories = Categories.objects.all()
         
         return render(request , 'dashboard.html',{'business': business, 'services': services,
