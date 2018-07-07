@@ -82,7 +82,8 @@
             {% endfor %}
 
         </div>
-        <button class="offset-5 btn btn-info">اضافه کردن سرویس</button><br><br><hr><br>
+        <a href="{% url 'addService' business.id%}"><button class="offset-5 btn btn-info">اضافه کردن سرویس</button></a>
+        <br><br><hr><br>
         <div class="row mt-5 justify-content-center">
                 <div class="col-8">
                     <canvas id="myChart"></canvas>

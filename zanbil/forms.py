@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import Review, Business, Test
+from .models import Review, Business, Test , Services
 
 
 class CommentForm(ModelForm):
@@ -18,3 +18,8 @@ class testForm(ModelForm):
     class Meta:
         model = Business
         fields = ['image']
+
+class serviceForm(ModelForm):
+    class Meta :
+        model = Services
+        fields = ['name','description','fee','capacity']

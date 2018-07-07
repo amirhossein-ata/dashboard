@@ -62,12 +62,14 @@ class Services(models.Model):
     # pics = ArrayField(models.ImageField(blank=True),blank=True,default=[])
     fee = models.FloatField()
     timetable = models.ForeignKey(TimeTable, on_delete=models.DO_NOTHING)
-    rating = models.FloatField()
+    rating = models.FloatField(default=0)
     description = models.TextField(max_length=600, default='test')
-    cancellation_fee = models.FloatField()
-    cancelation_time = models.FloatField()
+    cancellation_fee = models.FloatField(default=0)
+    cancelation_time = models.FloatField(default=0)
     capacity = models.IntegerField()
-    off = models.FloatField()
+    off = models.FloatField(default=0)
+    firstSans = models.FloatField(default=8)
+    lastSans = models.FloatField(default=20)
 
     def __str__(self):
         return self.name

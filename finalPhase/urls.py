@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from zanbil import views,BusinessPageController,BusinessSelectPageController,AccountPageController,ServicePageController,SearchController,dashboardController
+from zanbil import views,BusinessPageController,BusinessSelectPageController,AccountPageController,ServicePageController,SearchController,dashboardController,editServiceController
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,7 +35,10 @@ urlpatterns = [
     path('test',views.test),
     path('dashboard/<int:business_id>',dashboardController.dashboard , name='dashboard'),
     path('changePhoto/<int:id>',views.form,name='changePhoto'),
-    path('test/<int:id>',views.imagetest,name='imagetest')
+    path('test/<int:id>',views.imagetest,name='imagetest'),
+    path('addService/<int:business_id>',dashboardController.addService,name="addService"),
+    path('editService/<int:service_id>',editServiceController.Render,name='editServicePage')
+
 ]
 
 if settings.DEBUG is True:

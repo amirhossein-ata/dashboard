@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from datetime import timedelta
-from .models import Categories, Services, Reserves, Review, Business, Sans, Users
+from .models import Categories, Services, Reserves, Review, Business, Sans, Users , TimeTable
+from .forms import serviceForm
 from django.shortcuts import redirect
 from khayyam import *
 
@@ -46,3 +47,31 @@ def dashboard(request , business_id):
         
         return render(request , 'dashboard.html',{'business': business, 'services': services,
          'reviews': reviews, 'user': user,'categories':categories ,'dates':this_week_days , 'reserves_count' : reserves , 'total_reserves_count': total_count})
+
+def addService(request , business_id):
+    business = Business.objects.get(pk=business_id)
+    timetable = TimeTable.objects.create(sans_count=10 , work_days=[0],rest_times=[1])
+    # for i in range(7):
+    #     j = 7
+    #     while (j <= 20):
+    #         sans = Sans.objects.create(start_time = j , end_time=j+1 , time_table=timetable ,weekday = i)
+    #         j = j+2
+    if request.method == 'POST':
+    
+        print('method is post')
+        name = request.POST['ServiceName']
+        description = request.POST['Description']
+        fee = request.POST['Fee']
+        capacity = request.POST['Capacity']
+        print(name)
+        print(description)
+        print(fee)
+        print(capacity)
+        service = Services.objects.create(name=name,description=description,fee=fee,capacity=capacity,business = business,timetable =timetable)
+        service.save()
+        return redirect('editServicePage', service.id)
+
+    return render(request, 'addServiceForm.html', {'business_id':business_id})
+
+
+
