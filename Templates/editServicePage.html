@@ -20,160 +20,40 @@
        {% for sans in days.0 %}
 
            <div class=" time mt-md-3 mt-sm-2">
-               <button class="btn btn-outline-info  w-100" data-toggle="modal" {% if sans.is_reserved %}
-                       style="background-color: #0e8c8c ; color: black" disabled {% endif %}
-                       data-target="#{{ forloop.counter }}0"><a>{{ sans.start_time }}</a><a>to</a><a>{{ sans.end_time }}</a>
-               </button>
+                <a href="{% url 'deleteSans' sans.id service.id%}">
+                  <button class="btn btn-outline-info  w-100" >
+                      {{ sans.start_time }} تا {{ sans.end_time }}
+                  </button>
+               </a>
            </div>
-           <!-- Modal -->
-
-           <div class="modal fade" id="{{ forloop.counter }}0" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-               <div class="modal-dialog" role="document">
-
-                   <div class="modal-content">
-                       <div class="modal-header">
-
-                           <h5 class="modal-title" id="exampleModalLabel"></h5>
-                           <button type="button" class="close" data-dismiss="modal"
-                                   aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                           </button>
-                       </div>
-
-                       <div class="modal-body">
-
-                           you are booking sans {{ sans.sansdata.start_time }}
-                           to {{ sans.sansdata.end_time }}
-                       </div>
-                       <div class="modal-footer">
-                           <form method="post" action="{% url 'book' %}">
-                               {% csrf_token %}
-                               <label>توضیحات</label>
-                               <input hidden name="service_id" type="text" value="{{ service.id }}">
-                               <input type="text" name="description">
-                               <input name="date" hidden value="{{ date }}">
-                               <input name="sans_id" hidden value="{{ sans.sansdata.id }}">
-                               <input hidden name="day" value="0">
-                               <button class="btn btn-secondary" data-dismiss="modal">
-                                   بستن
-
-                               </button>
-                               <button class="btn btn-primary" type="submit">ثبت رزرو</button>
-                           </form>
-                       </div>
-                   </div>
-               </div>
-           </div>
+           
+           
        {% endfor %}
    </div>
    <div class="col text-center">
        <p style="font-size: 1em">یکشنبه</p>
        {% for sans in days.1 %}
-
-
-           <div class=" time mt-md-3 mt-sm-2">
-               <button class="btn btn-outline-info  w-100" data-toggle="modal" {% if sans.is_reserved %}
-                       style="background-color: #0e8c8c ; color: black" disabled {% endif %}
-                       data-target="#{{ forloop.counter }}1"><a>{{ sans.start_time }}</a><a>to</a><a>{{ sans.end_time }}</a>
-               </button>
+            <div class=" time mt-md-3 mt-sm-2">
+                <a href="{% url 'deleteSans' sans.id service.id%}">
+                  <button class="btn btn-outline-info  w-100" >
+                      {{ sans.start_time }} تا {{ sans.end_time }}
+                  </button>
+               </a>
            </div>
-           <!-- Modal -->
-
-           <div class="modal fade" id="{{ forloop.counter }}1" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-               <div class="modal-dialog" role="document">
-
-                   <div class="modal-content">
-                       <div class="modal-header">
-
-                           <h5 class="modal-title" id="exampleModalLabel"></h5>
-                           <button type="button" class="close" data-dismiss="modal"
-                                   aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                           </button>
-                       </div>
-
-                       <div class="modal-body">
-
-                           you are booking sans {{ sans.sansdata.start_time }}
-                           to {{ sans.sansdata.end_time }}
-                       </div>
-                       <div class="modal-footer">
-                           <form method="post" action="{% url 'book' %}">
-                               {% csrf_token %}
-                               <label>توضیحات</label>
-                               <input hidden name="service_id" type="text" value="{{ service.id }}">
-                               <input type="text" name="description">
-                               <input name="date" hidden value="{{ date }}">
-                               <input name="sans_id" hidden value="{{ sans.sansdata.id }}">
-                               <input hidden name="day" value="1">
-                               <button class="btn btn-secondary" data-dismiss="modal">
-                                   بستن
-
-                               </button>
-                               <button class="btn btn-primary" type="submit">ثبت رزرو</button>
-                           </form>
-                       </div>
-                   </div>
-               </div>
-           </div>
+           
        {% endfor %}
    </div>
    <div class="col text-center">
        <p style="font-size: 1em">دوشنبه</p>
        {% for sans in days.2 %}
 
-
-           <div class=" time mt-md-3 mt-sm-2">
-               <button class="btn btn-outline-info  w-100" data-toggle="modal" {% if sans.is_reserved %}
-                       style="background-color: #0e8c8c ; color: black" disabled {% endif %}
-                       data-target="#{{ forloop.counter }}2"><a>{{ sans.start_time }}</a><a>to</a><a>{{ sans.end_time }}</a>
-               </button>
-           </div>
-           <!-- Modal -->
-
-           <div class="modal fade" id="{{ forloop.counter }}2" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-               <div class="modal-dialog" role="document">
-
-                   <div class="modal-content">
-                       <div class="modal-header">
-
-                           <h5 class="modal-title" id="exampleModalLabel"></h5>
-                           <button type="button" class="close" data-dismiss="modal"
-                                   aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                           </button>
-                       </div>
-
-                       <div class="modal-body">
-
-                           you are booking sans {{ sans.sansdata.start_time }}
-                           to {{ sans.sansdata.end_time }}
-                       </div>
-                       <div class="modal-footer">
-                           <form method="post" action="{% url 'book' %}">
-                               {% csrf_token %}
-                               <label>توضیحات</label>
-                               <input hidden name="service_id" type="text" value="{{ service.id }}">
-                               <input type="text" name="description">
-                               <input name="date" hidden value="{{ date }}">
-                               <input name="sans_id" hidden value="{{ sans.sansdata.id }}">
-                               <input hidden name="day" value="2">
-                               <button class="btn btn-secondary" data-dismiss="modal">
-                                   بستن
-
-                               </button>
-                               <button class="btn btn-primary" type="submit">ثبت رزرو</button>
-                           </form>
-                       </div>
-                   </div>
-               </div>
-           </div>
+       <div class=" time mt-md-3 mt-sm-2">
+            <a href="{% url 'deleteSans' sans.id service.id%}">
+              <button class="btn btn-outline-info  w-100" >
+                  {{ sans.start_time }} تا {{ sans.end_time }}
+              </button>
+           </a>
+       </div>
        {% endfor %}
    </div>
    <div class="col text-center">
@@ -182,10 +62,13 @@
 
 
            <div class=" time mt-md-3 mt-sm-2">
-               <button class="btn btn-outline-info  w-100" data-toggle="modal" {% if sans.is_reserved %}
-                       style="background-color: #0e8c8c ; color: black" disabled {% endif %}
-                       data-target="#{{ forloop.counter }}3"><a>{{ sans.start_time }}</a><a>to</a><a>{{ sans.end_time }}</a>
-               </button>
+                <a href="{% url 'deleteSans' sans.id service.id%}">
+              
+                    <button class="btn btn-outline-info  w-100" data-toggle="modal" {% if sans.is_reserved %}
+                        style="background-color: #0e8c8c ; color: black" disabled {% endif %}
+                        data-target="#{{ forloop.counter }}3"><a>{{ sans.start_time }}</a><a>to</a><a>{{ sans.end_time }}</a>
+                   </button>
+                </a>
            </div>
            <!-- Modal -->
 
@@ -234,162 +117,41 @@
        <p style="font-size: 1em">چهارشنبه</p>
        {% for sans in days.4 %}
 
+            <div class=" time mt-md-3 mt-sm-2">
+              <a href="{% url 'deleteSans' sans.id service.id%}">
+                <button class="btn btn-outline-info  w-100" >
+                      {{ sans.start_time }} تا {{ sans.end_time }}
+                  </button>
+               </a>
+            </div>
 
-           <div class=" time mt-md-3 mt-sm-2">
-               <button class="btn btn-outline-info  w-100" data-toggle="modal" {% if sans.is_reserved %}
-                       style="background-color: #0e8c8c ; color: black" disabled {% endif %}
-                       data-target="#{{ forloop.counter }}4"><a>{{ sans.start_time }}</a><a>to</a><a>{{ sans.end_time }}</a>
-               </button>
-           </div>
-           <!-- Modal -->
-
-           <div class="modal fade" id="{{ forloop.counter }}4" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-               <div class="modal-dialog" role="document">
-
-                   <div class="modal-content">
-                       <div class="modal-header">
-
-                           <h5 class="modal-title" id="exampleModalLabel"></h5>
-                           <button type="button" class="close" data-dismiss="modal"
-                                   aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                           </button>
-                       </div>
-
-                       <div class="modal-body">
-
-                           you are booking sans {{ sans.sansdata.start_time }}
-                           to {{ sans.sansdata.end_time }}
-                       </div>
-                       <div class="modal-footer">
-                           <form method="post" action="{% url 'book' %}">
-                               {% csrf_token %}
-                               <label>توضیحات</label>
-                               <input hidden name="service_id" type="text" value="{{ service.id }}">
-                               <input type="text" name="description">
-                               <input name="date" hidden value="{{ date }}">
-                               <input name="sans_id" hidden value="{{ sans.sansdata.id }}">
-                               <input hidden name="day" value="4">
-                               <button class="btn btn-secondary" data-dismiss="modal">
-                                   بستن
-
-                               </button>
-                               <button class="btn btn-primary" type="submit">ثبت رزرو</button>
-                           </form>
-                       </div>
-                   </div>
-               </div>
-           </div>
        {% endfor %}
    </div>
    <div class="col text-center">
        <p style="font-size: 1em">پنجشنبه</p>
        {% for sans in days.5 %}
+            <div class=" time mt-md-3 mt-sm-2">
+                    <a href="{% url 'deleteSans' sans.id service.id%}">
+                    <button class="btn btn-outline-info  w-100" >
+                        {{ sans.start_time }} تا {{ sans.end_time }}
+                    </button>
+                </a>
+            </div>
+            
 
-
-           <div class=" time mt-md-3 mt-sm-2">
-               <button class="btn btn-outline-info  w-100" data-toggle="modal" {% if sans.is_reserved %}
-                       style="background-color: #0e8c8c ; color: black" disabled {% endif %}
-                       data-target="#{{ forloop.counter }}5"><a>{{ sans.start_time }}</a><a>to</a><a>{{ sans.end_time }}</a>
-               </button>
-           </div>
-           <!-- Modal -->
-
-           <div class="modal fade" id="{{ forloop.counter }}5" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-               <div class="modal-dialog" role="document">
-
-                   <div class="modal-content">
-                       <div class="modal-header">
-
-                           <h5 class="modal-title" id="exampleModalLabel"></h5>
-                           <button type="button" class="close" data-dismiss="modal"
-                                   aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                           </button>
-                       </div>
-
-                       <div class="modal-body">
-
-                           you are booking sans {{ sans.sansdata.start_time }}
-                           to {{ sans.sansdata.end_time }}
-                       </div>
-                       <div class="modal-footer">
-                           <form method="post" action="{% url 'book' %}">
-                               {% csrf_token %}
-                               <label>توضیحات</label>
-                               <input hidden name="service_id" type="text" value="{{ service.id }}">
-                               <input type="text" name="description">
-                               <input name="date" hidden value="{{ date }}">
-                               <input name="sans_id" hidden value="{{ sans.sansdata.id }}">
-                               <input hidden name="day" value="5">
-                               <button class="btn btn-secondary" data-dismiss="modal">
-                                   بستن
-
-                               </button>
-                               <button class="btn btn-primary" type="submit">ثبت رزرو</button>
-                           </form>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       {% endfor %}
+        {% endfor %}
    </div>
    <div class="col text-center">
        <p style="font-size: 1em">جمعه</p>
        {% for sans in days.6 %}
-
-
-           <div class=" time mt-md-3 mt-sm-2">
-               <button class="btn btn-outline-info  w-100" data-toggle="modal" {% if sans.is_reserved %}
-                       style="background-color: #0e8c8c ; color: black" disabled {% endif %}
-                       data-target="#{{ forloop.counter }}6"><a>{{ sans.start_time }}</a><a>to</a><a>{{ sans.end_time }}</a>
-               </button>
-           </div>
-           <!-- Modal -->
-
-           <div class="modal fade" id="{{ forloop.counter }}6" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-               <div class="modal-dialog" role="document">
-
-                   <div class="modal-content">
-                       <div class="modal-header">
-
-                           <h5 class="modal-title" id="exampleModalLabel"></h5>
-                           <button type="button" class="close" data-dismiss="modal"
-                                   aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                           </button>
-                       </div>
-
-                       <div class="modal-body">
-
-                           you are booking sans {{ sans.sansdata.start_time }}
-                           to {{ sans.sansdata.end_time }}
-                       </div>
-                       <div class="modal-footer">
-                           <form method="post" action="{% url 'book' %}">
-                               {% csrf_token %}
-                               <label>توضیحات</label>
-                               <input hidden name="service_id" type="text" value="{{ service.id }}">
-                               <input type="text" name="description">
-                               <input name="date" hidden value="{{ date }}">
-                               <input name="sans_id" hidden value="{{ sans.sansdata.id }}">
-                               <input hidden name="day" value='6'>
-                               <button class="btn btn-secondary" data-dismiss="modal">
-                                   بستن
-
-                               </button>
-                               <button class="btn btn-primary" type="submit">ثبت رزرو</button>
-                           </form>
-                       </div>
-                   </div>
-               </div>
-           </div>
+            <div class=" time mt-md-3 mt-sm-2">
+               <a href="{% url 'deleteSans' sans.id service.id%}">
+                  <button class="btn btn-outline-info  w-100" >
+                      {{ sans.start_time }} تا {{ sans.end_time }}
+                  </button>
+               </a>
+            </div>
+                 
        {% endfor %}
    </div>
 </div>

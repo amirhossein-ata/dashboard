@@ -4,7 +4,7 @@ from .models import Categories, Services, Reserves, Review, Business, Sans, User
 from .forms import serviceForm
 from django.shortcuts import redirect
 from khayyam import *
-
+from .forms import testForm
 # Create your views here.
 
 categories = Categories.objects.all()
@@ -24,10 +24,10 @@ def render_dashboard(request , business_id):
             this_week_days.append(weekday_date.__str__().replace('-','/'))
             weekday_date = weekday_date + timedelta(1)
 
-        reserves = []
-        for date in this_week_days:
-            reserves.append(len(Reserves.objects.filter(date = date)))
-        
+       # reserves = []
+       # for date in this_week_days:
+       #     reserves.append(len(Reserves.objects.filter(date = date)))
+        reserves = getReservePerDate(this_week_days)
         total_count = sum(reserves)
 
         # listed_reviews = []
@@ -63,15 +63,42 @@ def addService(request , business_id):
         description = request.POST['Description']
         fee = request.POST['Fee']
         capacity = request.POST['Capacity']
+        firstSans = request.POST['firstSans']
+        lastSans = request.POST['lastSans']
+        restTimeStart = request.POST['restTimeStart']
+        restTimeEnd = request.POST['restTimeEnd']
         print(name)
         print(description)
         print(fee)
         print(capacity)
-        service = Services.objects.create(name=name,description=description,fee=fee,capacity=capacity,business = business,timetable =timetable)
+        print(firstSans)
+        print(lastSans)
+        print(restTimeStart)
+        print(restTimeEnd)
+        service = Services.objects.create(name=name,description=description,fee=fee,capacity=capacity,business = business,timetable =timetable, firstSans = firstSans , lastSans = lastSans , restTimeStart = restTimeStart , restTimeEnd = restTimeEnd)
         service.save()
-        return redirect('editServicePage', service.id)
+        return redirect('buildTimeTable', service.id)
 
     return render(request, 'addServiceForm.html', {'business_id':business_id})
 
 
+def changePhoto (request,id):
+    if request.method == 'POST':
+        form = testForm(request.POST, request.FILES)
+        if form.is_valid():
+            savedBusiness = Business.objects.get(pk=id) 
+            business = form.save(commit=False)
+            savedBusiness.image = business.image
+            savedBusiness.save()
+            return redirect('BusinessPage', id)
+        else:
+            print('ridi')
+    else:
+        form = testForm()
+    return render(request,'uploadPhotoForm.html', {'id':id})
 
+def getReservePerDate(weekday):
+        reserves = []
+        for date in weekday:
+            reserves.append(len(Reserves.objects.filter(date = date)))
+        return reserves

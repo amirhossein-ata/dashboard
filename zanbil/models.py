@@ -70,6 +70,9 @@ class Services(models.Model):
     off = models.FloatField(default=0)
     firstSans = models.FloatField(default=8)
     lastSans = models.FloatField(default=20)
+    restTimeStart = models.FloatField(default=12)
+    restTimeEnd = models.FloatField(default=12)
+
 
     def __str__(self):
         return self.name
