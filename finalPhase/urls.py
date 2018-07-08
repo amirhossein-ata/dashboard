@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from zanbil import views,BusinessPageController , editServiceController
+from zanbil import views,BusinessPageController , editServiceController , addServiceController
 from zanbil import BusinessSelectPageController,AccountPageController,ServicePageController,SearchController
 from zanbil import dashboardController,addAndDeleteBusinessController,editServiceController
 
@@ -22,7 +22,7 @@ urlpatterns = [
     path('dashboard/<int:business_id>',dashboardController.render_dashboard , name='dashboard'),
     path('changePhoto/<int:id>',dashboardController.changePhoto,name='changePhoto'),
     path('test/<int:id>',views.imagetest,name='imagetest'),
-    path('addService/<int:business_id>',dashboardController.addService,name="addService"),
+    path('addService/<int:business_id>',addServiceController.addService,name="addService"),
     path('editService/<int:service_id>',editServiceController.Render,name='editServicePage') ,
     path('addBusiness',addAndDeleteBusinessController.addBusiness,name = 'addBusiness'),
     path('deleteSans/<int:sans_id>/<int:service_id>',editServiceController.deleteSans,name='deleteSans'),
